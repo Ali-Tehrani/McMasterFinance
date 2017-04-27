@@ -1,0 +1,428 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <link rel="stylesheet" href="file:///C:/MATLAB/R2014b/toolbox/matlab/helptools/private/helpwin.css">
+      <title>MATLAB File Help: rotmanTrader</title>
+   </head>
+   <body>
+      <!--Single-page help-->
+      <table border="0" cellspacing="0" width="100%">
+         <tr class="subheader">
+            <td class="headertitle">MATLAB File Help: rotmanTrader</td>
+            <td class="subheader-left"><a href="matlab:edit rotmanTrader">View code for rotmanTrader</a></td>
+            <td class="subheader-right"><a href="matlab:doc">Default Topics</a></td>
+         </tr>
+      </table>
+      <div class="title">rotmanTrader</div>
+      <div class="helptext"><pre><!--helptext --> <span class="helptopic">rotmanTrader</span> connects MATLAB(R) to Rotman Interactive Trader
+ 
+    RIT = <span class="helptopic">rotmanTrader</span> will create a connection to the Rotman
+    Interactive Trader API using the path specified in the Windows
+    System registry.
+ 
+    RIT = <span class="helptopic">rotmanTrader</span>(DLLPATH) connects to Rotman Interactive Trader
+    through the DLLPATH specified.  This allows connection to different
+    dll locations.
+ 
+    A connection is required to trade from MATLAB through Rotman
+    Interactive Trader.
+ 
+    Example:
+    rit = <span class="helptopic">rotmanTrader</span></pre></div><!--after help --><!--seeAlso--><div class="footerlinktitle">See also</div><div class="footerlink"> <a href="matlab:doc rotmanTrader/buy">buy</a>, <a href="matlab:doc rotmanTrader/sell">sell</a>, <a href="matlab:doc rotmanTrader/limitOrder">limitOrder</a>, <a href="matlab:doc rotmanTrader/blotterOrder">blotterOrder</a>, <a href="matlab:doc rotmanTrader/addOrder">addOrder</a></div><!--demo--><div class="footerlinktitle">Published output in the Help browser</div><div class="footerlink">
+       <a href="matlab:showdemo rotmanTrader">showdemo rotmanTrader</a>
+</div>
+      <!--Class-->
+      <div class="sectiontitle">Class Details</div>
+      <table class="class-details">
+         <tr>
+            <td class="class-detail-label">Superclasses</td>
+            <td><a href="matlab:doc('dynamicprops')">dynamicprops</a></td>
+         </tr>
+         <tr>
+            <td class="class-detail-label">Sealed</td>
+            <td>false</td>
+         </tr>
+         <tr>
+            <td class="class-detail-label">Construct on load</td>
+            <td>false</td>
+         </tr>
+      </table>
+      <!--Constructors-->
+      <div class="sectiontitle"><a name="constructors"></a>Constructor Summary
+      </div>
+      <table class="summary-list">
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.rotmanTrader')">rotmanTrader</a></td>
+            <td class="m-help">connects MATLAB(R) to Rotman Interactive Trader&nbsp;</td>
+         </tr>
+      </table>
+      <!--Properties-->
+      <div class="sectiontitle"><a name="properties"></a>Property Summary
+      </div>
+      <table class="summary-list">
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.allAssetTickerInfo')">allAssetTickerInfo</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.allAssetTickers')">allAssetTickers</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.allTickerInfo')">allTickerInfo</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.allTickers')">allTickers</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.cash')">cash</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.lastUpdate')">lastUpdate</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.period')">period</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.pl')">pl</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.timeRemaining')">timeRemaining</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.timeSpeed')">timeSpeed</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.traderID')">traderID</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.traderName')">traderName</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.updateFcns')">updateFcns</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.updateFreq')">updateFreq</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.updateTimer')">updateTimer</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.yearTime')">yearTime</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+      </table>
+      <!--Methods-->
+      <div class="sectiontitle"><a name="methods"></a>Method Summary
+      </div>
+      <table class="summary-list">
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.addOrder')">addOrder</a></td>
+            <td class="m-help">submits an order to Rotman Interactive Trader.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.addUpdateFcn')">addUpdateFcn</a></td>
+            <td class="m-help">adds the function to the list of callbacks&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.addlistener')">addlistener</a></td>
+            <td class="m-help">Add listener for event.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.addprop')">addprop</a></td>
+            <td class="m-help">Add dynamic property to MATLAB object.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.blotterOrder')">blotterOrder</a></td>
+            <td class="m-help">submits orders using an order blotter to Rotman&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.buy')">buy</a></td>
+            <td class="m-help">submits a market buy order to Rotman Interactive Trader.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.cancelOrder')">cancelOrder</a></td>
+            <td class="m-help">cancels an open order using the order id&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.cancelOrderExpr')">cancelOrderExpr</a></td>
+            <td class="m-help">cacnels open orders that satisfy the&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.cancelQueuedOrder')">cancelQueuedOrder</a></td>
+            <td class="m-help">cancels an order using the queued order id&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.clearQueuedOrders')">clearQueuedOrders</a></td>
+            <td class="m-help">CLEARQUEUUEDORDERs cancels all queued orders&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.delete')">delete</a></td>
+            <td class="m-help">stops updates and deletes rotmanTrader object&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.eq')">eq</a></td>
+            <td class="m-help">== (EQ)   Test handle equality.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.findobj')">findobj</a></td>
+            <td class="m-help">Find objects matching specified conditions.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.findprop')">findprop</a></td>
+            <td class="m-help">Find property of MATLAB handle object.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.ge')">ge</a></td>
+            <td class="m-help">>= (GE)   Greater than or equal relation for handles.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.getOrderInfo')">getOrderInfo</a></td>
+            <td class="m-help">returns open order information&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.getOrders')">getOrders</a></td>
+            <td class="m-help">returns order id's&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.getSubscriptions')">getSubscriptions</a></td>
+            <td class="m-help">returns a table of active subscriptions&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.getTickerInfo')">getTickerInfo</a></td>
+            <td class="m-help">returns ticker information as a table&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.gt')">gt</a></td>
+            <td class="m-help">> (GT)   Greater than relation for handles.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.isOrderQueued')">isOrderQueued</a></td>
+            <td class="m-help">returns true or false if the order is queued&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">Sealed 
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.isvalid')">isvalid</a></td>
+            <td class="m-help">Test handle validity.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.le')">le</a></td>
+            <td class="m-help"><= (LE)   Less than or equal relation for handles.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.limitOrder')">limitOrder</a></td>
+            <td class="m-help">submits a limit order to Rotman Interactive Trader.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.lt')">lt</a></td>
+            <td class="m-help">< (LT)   Less than relation for handles.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.ne')">ne</a></td>
+            <td class="m-help">~= (NE)   Not equal relation for handles.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.notify')">notify</a></td>
+            <td class="m-help">Notify listeners of event.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.removeUpdateFcn')">removeUpdateFcn</a></td>
+            <td class="m-help">removes the specified function from updates&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.restartTimer')">restartTimer</a></td>
+            <td class="m-help">will restart the timer for updates if stopped&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.sell')">sell</a></td>
+            <td class="m-help">submits a market sell order to Rotman Interactive Trader.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.stopUpdates')">stopUpdates</a></td>
+            <td class="m-help">stops real-time updates by stopping the timer&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.subscribe')">subscribe</a></td>
+            <td class="m-help">adds topic to subscription from RIT&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.unsubscribe')">unsubscribe</a></td>
+            <td class="m-help">remove the topic from subscription list&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="attributes">
+               &nbsp;
+               
+            </td>
+            <td class="name"><a href="matlab:doc('rotmanTrader.update')">update</a></td>
+            <td class="m-help">updates subscription data&nbsp;</td>
+         </tr>
+      </table>
+      <!--Events-->
+      <div class="sectiontitle"><a name="events"></a>Event Summary
+      </div>
+      <table class="summary-list">
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.ObjectBeingDestroyed')">ObjectBeingDestroyed</a></td>
+            <td class="m-help">Notifies listeners that a particular object has been destroyed.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.PropertyAdded')">PropertyAdded</a></td>
+            <td class="m-help">Notifies listeners that a dynamic property has been added.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.PropertyRemoved')">PropertyRemoved</a></td>
+            <td class="m-help">Notifies listeners that a dynamic property has been removed.&nbsp;</td>
+         </tr>
+         <tr class="summary-item">
+            <td class="name"><a href="matlab:doc('rotmanTrader.UpdatesAvailable')">UpdatesAvailable</a></td>
+            <td class="m-help">&nbsp;</td>
+         </tr>
+      </table>
+   </body>
+</html>

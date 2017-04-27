@@ -1,0 +1,690 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Streaming Data from Rotman Interactive Trader to MATLAB&reg;</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-02-04"><meta name="DC.source" content="streamingDataExample.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Streaming Data from Rotman Interactive Trader to MATLAB&reg;</h1><!--introduction--><p>This example shows how to connect to and stream data from Rotman Interactive Trader (RIT) using <tt>rotmanTrader</tt> functionality.  RIT must be installed on your computer along with the Excel RTD Links.  For more information visit <a href="http://rit.rotman.utoronto.ca/software.asp">http://rit.rotman.utoronto.ca/software.asp</a>.  This example also assumes that RIT is running Liability Trading 3 Case.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Create a Connection</a></li><li><a href="#3">Subscribing to RIT Data</a></li><li><a href="#7">Working with Streaming Data</a></li><li><a href="#14">Create a Plot that Updates with New Data</a></li><li><a href="#20">Unsubscribing</a></li><li><a href="#23">Cleaning Up</a></li></ul></div><h2>Create a Connection<a name="1"></a></h2><p>First step is to create a connection to RIT.  To do this, issue the <tt>rotmanTrader</tt> command.</p><pre class="codeinput">rit = rotmanTrader
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 2
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 6620
+
+</pre><p>Notice that the rit connection has properties listed.  These default properties are always available and update with the frequency listed in the updateFreq property.  The default value is 2 seconds.  Also listed is the last update timestamp in lastUpdate.  To change the update frequency, set the property to a different value.  For example, to change it to 1 seconds:</p><pre class="codeinput">rit.updateFreq = 1
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 6620
+
+</pre><h2>Subscribing to RIT Data<a name="3"></a></h2><p>Data is retrieved from RIT using the same server that is used for Microsoft Excel.  In RIT, you can click on the RTD link in the bottom right corner.  It will bring up this image with available data fields.</p><p><img vspace="5" hspace="5" src="rtd_fields.png" alt=""> </p><p>In Excel, you use the RTD function to return data.  In MATLAB, you use the <tt>subscribe</tt> command to enter the field information for the data you wish to subscribe to.  This will add the data to the rit variable we created earlier.  For example, to get the last traded price we need to enter two fields, the ticker symbol and the LAST string separated by a |. For example, to subscribe to security CRZY and add the LAST price to our connection to RIT (the rit variable defined earlier), type</p><pre class="codeinput">subscribe(rit,<span class="string">'CRZY|LAST'</span>)
+rit
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 6620
+              crzy_ask: 10.5600
+             crzy_last: 10.5200
+
+</pre><p>You can see that RIT now has a new property of crzy_last that will update with last traded prices.  Subscriptions added will show up as additional properties.  To return the data, simply type</p><pre class="codeinput">rit.crzy_last
+</pre><pre class="codeoutput">
+ans =
+
+   10.5200
+
+</pre><p>Note that when <tt>subscribe</tt> is called, data is updated from RIT.  You can also force an update by issuing <tt>update</tt></p><pre class="codeinput">update(rit)
+rit
+</pre><pre class="codeoutput">
+ans = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 6620
+              crzy_ask: 10.5600
+             crzy_last: 10.5200
+
+
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 8028
+              crzy_ask: 10.5600
+             crzy_last: 10.5200
+
+</pre><p>We could also add the bid and ask as well.  Note the need to separate the list of two subscriptions by ";" is required.</p><pre class="codeinput">subscribe(rit,{<span class="string">'CRZY|BID'</span>;<span class="string">'CRZY|ASK'</span>})
+rit
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 8028
+              crzy_ask: 10.5800
+             crzy_last: 10.5800
+              crzy_bid: 10.5200
+
+</pre><h2>Working with Streaming Data<a name="7"></a></h2><p>To work with streaming data, you add a function that is called each time data is updated.  To do this, let's first create a function that will display the last price for CRZY.</p><pre class="codeinput">fcn = @(input) disp([<span class="string">'CRZY Last Traded at $'</span>,num2str(input.crzy_last,<span class="string">'%4.2f'</span>)])
+</pre><pre class="codeoutput">
+fcn = 
+
+    @(input)disp(['CRZY Last Traded at $',num2str(input.crzy_last,'%4.2f')])
+
+</pre><p>What we created here was a function that will print to the command window the last traded price for CRZY every time an update is called for <tt>rotmanTrader</tt> (every second in this case).  The input in this case is the <tt>rotmanTrader</tt> variable. For example, test the function:</p><pre class="codeinput">fcn(rit)
+</pre><pre class="codeoutput">CRZY Last Traded at $10.58
+</pre><p>Now add it to the list of updateFcns and it will be executed every time there is an update.</p><pre class="codeinput">addUpdateFcn(rit,fcn)
+rit
+pause(10)
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:52:51'
+           updateTimer: [1x1 timer]
+            updateFcns: {1x2 cell}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 118
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: -64
+                  cash: 8028
+              crzy_ask: 10.5800
+             crzy_last: 10.5800
+              crzy_bid: 10.5200
+
+CRZY Last Traded at $10.54
+CRZY Last Traded at $10.51
+CRZY Last Traded at $10.54
+CRZY Last Traded at $10.56
+CRZY Last Traded at $10.56
+CRZY Last Traded at $10.59
+CRZY Last Traded at $10.59
+CRZY Last Traded at $10.59
+CRZY Last Traded at $10.57
+CRZY Last Traded at $10.57
+</pre><p>Add another function for bids and asks</p><pre class="codeinput">askfcn = @(input) disp([<span class="string">'CRZY ASK Price is $'</span>,num2str(input.crzy_ask,<span class="string">'%4.2f'</span>)])
+addUpdateFcn(rit,askfcn)
+bidfcn = @(input) disp([<span class="string">'CRZY BID Price is $'</span>,num2str(input.crzy_bid,<span class="string">'%4.2f'</span>)])
+addUpdateFcn(rit,bidfcn)
+rit
+pause(10)
+</pre><pre class="codeoutput">
+askfcn = 
+
+    @(input)disp(['CRZY ASK Price is $',num2str(input.crzy_ask,'%4.2f')])
+
+
+bidfcn = 
+
+    @(input)disp(['CRZY BID Price is $',num2str(input.crzy_bid,'%4.2f')])
+
+
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:53:01'
+           updateTimer: [1x1 timer]
+            updateFcns: {1x3 cell}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 108
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: 49.5000
+                  cash: 1.2356e+04
+              crzy_ask: 10.5900
+             crzy_last: 10.5700
+              crzy_bid: 10.5700
+
+CRZY BID Price is $10.56
+CRZY ASK Price is $10.59
+CRZY Last Traded at $10.56
+CRZY BID Price is $10.56
+CRZY ASK Price is $10.59
+CRZY Last Traded at $10.56
+CRZY BID Price is $10.56
+CRZY ASK Price is $10.61
+CRZY Last Traded at $10.61
+CRZY BID Price is $10.55
+CRZY ASK Price is $10.61
+CRZY Last Traded at $10.55
+CRZY BID Price is $10.51
+CRZY ASK Price is $10.61
+CRZY Last Traded at $10.61
+CRZY BID Price is $10.51
+CRZY ASK Price is $10.54
+CRZY Last Traded at $10.61
+CRZY BID Price is $10.50
+CRZY ASK Price is $10.54
+CRZY Last Traded at $10.49
+CRZY BID Price is $10.52
+CRZY ASK Price is $10.54
+CRZY Last Traded at $10.49
+CRZY BID Price is $10.52
+CRZY ASK Price is $10.54
+CRZY Last Traded at $10.49
+CRZY BID Price is $10.52
+CRZY ASK Price is $10.54
+CRZY Last Traded at $10.49
+</pre><p>Note that updateFcns is  1x3 cell array listing the functions that will be executed with each update.</p><pre class="codeinput">rit.updateFcns{:}
+</pre><pre class="codeoutput">
+ans =
+
+@(input)disp(['CRZY ASK Price is $',num2str(input.crzy_ask,'%4.2f')])
+
+
+ans =
+
+@(input)disp(['CRZY BID Price is $',num2str(input.crzy_bid,'%4.2f')])
+
+
+ans =
+
+@(input)disp(['CRZY Last Traded at $',num2str(input.crzy_last,'%4.2f')])
+
+</pre><p>To stop the updates, simply remove the function from the list using the <tt>removeUpdateFcn</tt> and pass in function name to remove.  We'll remove the last traded price</p><pre class="codeinput">removeUpdateFcn(rit,rit.updateFcns{1})
+rit
+pause(10)
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:53:11'
+           updateTimer: [1x1 timer]
+            updateFcns: {1x2 cell}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 98
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: 64.9000
+                  cash: 8.1872e+03
+              crzy_ask: 10.5400
+             crzy_last: 10.4900
+              crzy_bid: 10.5200
+
+CRZY BID Price is $10.53
+CRZY Last Traded at $10.57
+CRZY BID Price is $10.53
+CRZY Last Traded at $10.57
+CRZY BID Price is $10.53
+CRZY Last Traded at $10.53
+CRZY BID Price is $10.51
+CRZY Last Traded at $10.55
+CRZY BID Price is $10.51
+CRZY Last Traded at $10.56
+CRZY BID Price is $10.49
+CRZY Last Traded at $10.49
+CRZY BID Price is $10.50
+CRZY Last Traded at $10.49
+CRZY BID Price is $10.52
+CRZY Last Traded at $10.57
+CRZY BID Price is $10.50
+CRZY Last Traded at $10.61
+CRZY BID Price is $10.50
+CRZY Last Traded at $10.61
+</pre><p>Remove the bid and ask functions</p><pre class="codeinput">rit.updateFcns{:}
+removeUpdateFcn(rit,rit.updateFcns{2})
+removeUpdateFcn(rit,rit.updateFcns{1})
+rit
+pause(10)
+</pre><pre class="codeoutput">
+ans =
+
+@(input)disp(['CRZY BID Price is $',num2str(input.crzy_bid,'%4.2f')])
+
+
+ans =
+
+@(input)disp(['CRZY Last Traded at $',num2str(input.crzy_last,'%4.2f')])
+
+
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:53:21'
+           updateTimer: [1x1 timer]
+            updateFcns: {1x0 cell}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 88
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: 67.2000
+                  cash: 8.1872e+03
+              crzy_ask: 10.5300
+             crzy_last: 10.6100
+              crzy_bid: 10.5000
+
+</pre><h2>Create a Plot that Updates with New Data<a name="14"></a></h2><p>Create a simple plot that has bid, ask, and last trade price for CRZY and adds data to the plot as <tt>rit</tt> updates.</p><pre class="codeinput">h = plot(datenum(rit.lastUpdate),rit.crzy_bid,<span class="string">'-*'</span>, <span class="keyword">...</span>
+     datenum(rit.lastUpdate),rit.crzy_last,<span class="string">'-x'</span>, <span class="keyword">...</span>
+     datenum(rit.lastUpdate),rit.crzy_ask,<span class="string">'-o'</span>);
+grid <span class="string">on</span>
+datetick
+legend(<span class="string">'Bid'</span>,<span class="string">'Last'</span>,<span class="string">'Ask'</span>)
+ylabel(<span class="string">'Price'</span>)
+xlabel(<span class="string">'Time'</span>)
+title(<span class="string">'CRZY Price History'</span>)
+</pre><img vspace="5" hspace="5" src="streamingDataExample_01.png" alt=""> <p>Define a function to update the plot</p><pre class="codeinput">type <span class="string">updatePlotFcn</span>
+</pre><pre class="codeoutput">
+function updatePlotFcn(h,data)
+%UPDATEPLOTFCN is an example function for updating a line plot
+
+% Copyright 2015 The MathWorks, Inc.
+
+% update x axis
+x = datenum(data.lastUpdate);
+h(1).XData(end+1) = x;
+h(2).XData(end+1) = x;
+h(3).XData(end+1) = x;
+
+% update y axis
+h(1).YData(end+1) = data.crzy_bid;
+h(2).YData(end+1) = data.crzy_last;
+h(3).YData(end+1) = data.crzy_ask;
+
+% update plot format
+datetick('x','HH:MM:SS');
+xlim('auto');
+drawnow;
+</pre><p>Test the function by adding a new update and set x axis updating to auto</p><pre class="codeinput">updatePlotFcn(h,rit)
+</pre><img vspace="5" hspace="5" src="streamingDataExample_02.png" alt=""> <p>Add it to updateFcns list</p><pre class="codeinput">addUpdateFcn(rit,@(input) updatePlotFcn(h,input));
+</pre><p>Watch the plot update</p><pre class="codeinput">pause(30)
+gcf;
+</pre><img vspace="5" hspace="5" src="streamingDataExample_03.png" alt=""> <p>remove plot update function before unsubscribing</p><pre class="codeinput">removeUpdateFcn(rit,rit.updateFcns{1})
+</pre><h2>Unsubscribing<a name="20"></a></h2><p>To unsubscribe from a source of data, use <tt>unsubscribe</tt>.  Note that if you have any update functions that are using this data, you need to remove them first.</p><p>Unsubscribe from the bid price for CRZY.  First get the subscription list and IDs</p><pre class="codeinput">topics = getSubscriptions(rit)
+</pre><pre class="codeoutput">
+topics = 
+
+    ID       Topic   
+    __    ___________
+
+    1     'CRZY|ASK' 
+    2     'CRZY|LAST'
+    3     'CRZY|BID' 
+
+</pre><p>Now use the topic ID to remove the subscription</p><pre class="codeinput">unsubscribe(rit,topics.ID(1))
+rit
+</pre><pre class="codeoutput">
+rit = 
+
+  rotmanTrader with properties:
+
+            updateFreq: 1
+            lastUpdate: '04-Feb-2015 08:54:03'
+           updateTimer: [1x1 timer]
+            updateFcns: {1x0 cell}
+            traderName: 'Stuart Kozola'
+              traderID: 'matlabStu'
+         timeRemaining: 46
+                period: 1
+              yearTime: 15600
+             timeSpeed: 1
+       allAssetTickers: ''
+    allAssetTickerInfo: ''
+            allTickers: {'CRZY'  'TAME'}
+         allTickerInfo: {2x6 cell}
+                    pl: 259.9000
+                  cash: 8.1872e+03
+             crzy_last: 10.3500
+              crzy_bid: 10.3700
+
+</pre><p>The data is no longer retrieved and is removed form the rit variable.</p><h2>Cleaning Up<a name="23"></a></h2><p>To properly clean up, you first need to delete the <tt>rotmanTrader</tt> connection before clearing it from the workspace.  This stops the updates and disconnect from Rotman Interactive Trader.</p><pre class="codeinput">delete(rit)
+clear <span class="string">rit</span>
+</pre><p>We now no longer have a connection.</p><p>If you cleared the rit variable before issuing delete, the update timer is still running in the background, and you may see errors/warnings.  To stop it, issue the following command:</p><pre class="codeinput">delete(timerfind(<span class="string">'Name'</span>,<span class="string">'RotmanTrader'</span>))
+</pre><p class="footer">Copyright 2015 The MathWorks, Inc.<br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Streaming Data from Rotman Interactive Trader to MATLAB(R)
+% This example shows how to connect to and stream data from Rotman
+% Interactive Trader (RIT) using |rotmanTrader| functionality.  RIT must be
+% installed on your computer along with the Excel RTD Links.  For more
+% information visit http://rit.rotman.utoronto.ca/software.asp.  This
+% example also assumes that RIT is running Liability Trading 3 Case.
+
+% Copyright 2015 The MathWorks, Inc.
+
+%% Create a Connection
+% First step is to create a connection to RIT.  To do this, issue the
+% |rotmanTrader| command.
+rit = rotmanTrader
+
+%%
+% Notice that the rit connection has properties listed.  These default
+% properties are always available and update with the frequency listed in
+% the updateFreq property.  The default value is 2 seconds.  Also listed is
+% the last update timestamp in lastUpdate.  To change the update frequency,
+% set the property to a different value.  For example, to change it to 1
+% seconds:
+rit.updateFreq = 1
+
+%% Subscribing to RIT Data
+% Data is retrieved from RIT using the same server that is used for
+% Microsoft Excel.  In RIT, you can click on the RTD link in the bottom
+% right corner.  It will bring up this image with available data fields.
+% 
+% <<rtd_fields.png>>
+%
+% In Excel, you use the RTD function to return data.  In MATLAB, you use
+% the |subscribe| command to enter the field information for the data you
+% wish to subscribe to.  This will add the data to the rit variable we
+% created earlier.  For example, to get the last traded price we need to
+% enter two fields, the ticker symbol and the LAST string separated by a |.
+% For example, to subscribe to security CRZY and add the LAST price to our
+% connection to RIT (the rit variable defined earlier), type
+subscribe(rit,'CRZY|LAST')
+rit
+%%
+% You can see that RIT now has a new property of crzy_last that will update
+% with last traded prices.  Subscriptions added will show up as additional
+% properties.  To return the data, simply type
+rit.crzy_last
+%%
+% Note that when |subscribe| is called, data is updated from RIT.  You can
+% also force an update by issuing |update|
+update(rit)
+rit
+
+%%
+% We could also add the bid and ask as well.  Note the need to separate the
+% list of two subscriptions by ";" is required.
+subscribe(rit,{'CRZY|BID';'CRZY|ASK'})
+rit
+
+%% Working with Streaming Data
+% To work with streaming data, you add a function that is called each time
+% data is updated.  To do this, let's first create a function that will
+% display the last price for CRZY.
+fcn = @(input) disp(['CRZY Last Traded at $',num2str(input.crzy_last,'%4.2f')])
+%%
+% What we created here was a function that will print to the command window
+% the last traded price for CRZY every time an update is called for
+% |rotmanTrader| (every second in this case).  The input in this case is
+% the |rotmanTrader| variable. For example, test the function:
+fcn(rit)
+%%
+% Now add it to the list of updateFcns and it will be executed every time
+% there is an update.
+addUpdateFcn(rit,fcn)
+rit
+pause(10)
+
+%%
+% Add another function for bids and asks
+askfcn = @(input) disp(['CRZY ASK Price is $',num2str(input.crzy_ask,'%4.2f')])
+addUpdateFcn(rit,askfcn)
+bidfcn = @(input) disp(['CRZY BID Price is $',num2str(input.crzy_bid,'%4.2f')])
+addUpdateFcn(rit,bidfcn)
+rit
+pause(10)
+%%
+% Note that updateFcns is  1x3 cell array listing the functions that will
+% be executed with each update.
+rit.updateFcns{:}
+
+%%
+% To stop the updates, simply remove the function from the list using the
+% |removeUpdateFcn| and pass in function name to remove.  We'll remove the
+% last traded price
+removeUpdateFcn(rit,rit.updateFcns{1})
+rit
+pause(10)
+
+%%
+% Remove the bid and ask functions
+rit.updateFcns{:}
+removeUpdateFcn(rit,rit.updateFcns{2})
+removeUpdateFcn(rit,rit.updateFcns{1})
+rit
+pause(10)
+
+%% Create a Plot that Updates with New Data
+% Create a simple plot that has bid, ask, and last trade price for CRZY and
+% adds data to the plot as |rit| updates.
+h = plot(datenum(rit.lastUpdate),rit.crzy_bid,'-*', ...
+     datenum(rit.lastUpdate),rit.crzy_last,'-x', ...
+     datenum(rit.lastUpdate),rit.crzy_ask,'-o');
+grid on
+datetick
+legend('Bid','Last','Ask')
+ylabel('Price')
+xlabel('Time')
+title('CRZY Price History')
+
+%%
+% Define a function to update the plot
+type updatePlotFcn
+%%
+% Test the function by adding a new update and set x axis updating to auto
+updatePlotFcn(h,rit)
+
+%%
+% Add it to updateFcns list
+addUpdateFcn(rit,@(input) updatePlotFcn(h,input));
+
+%%
+% Watch the plot update
+pause(30)
+gcf;
+
+%%
+% remove plot update function before unsubscribing
+removeUpdateFcn(rit,rit.updateFcns{1})
+
+%% Unsubscribing
+% To unsubscribe from a source of data, use |unsubscribe|.  Note that if
+% you have any update functions that are using this data, you need to
+% remove them first.
+%
+% Unsubscribe from the bid price for CRZY.  First get the subscription list
+% and IDs
+topics = getSubscriptions(rit)
+%%
+% Now use the topic ID to remove the subscription
+unsubscribe(rit,topics.ID(1))
+rit
+%%
+% The data is no longer retrieved and is removed form the rit variable.
+
+%% Cleaning Up
+% To properly clean up, you first need to delete the |rotmanTrader|
+% connection before clearing it from the workspace.  This stops the updates
+% and disconnect from Rotman Interactive Trader.
+delete(rit)
+clear rit
+%%
+% We now no longer have a connection.
+%
+% If you cleared the rit variable before issuing delete, the update timer is
+% still running in the background, and you may see errors/warnings.  To
+% stop it, issue the following command:
+delete(timerfind('Name','RotmanTrader'))
+
+
+##### SOURCE END #####
+--></body></html>

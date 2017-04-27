@@ -1,0 +1,670 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Trading with Rotman Intractive Trader</title><meta name="generator" content="MATLAB 8.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-02-04"><meta name="DC.source" content="tradingExample.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Trading with Rotman Intractive Trader</h1><!--introduction--><p>This example shows how to use the rotmanTrader functions to connect to and trade through Rotman Interactive Trader (RIT).  RIT must be installed on your computer along with the Excel&reg; RTD Links.  For more information visit <a href="http://rit.rotman.utoronto.ca/software.asp">http://rit.rotman.utoronto.ca/software.asp</a>.  This example also assumes that RIT is running Liability Trading 3 Case.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Create a Connection</a></li><li><a href="#3">Submitting Market Orders</a></li><li><a href="#7">Submitting Limit Orders</a></li><li><a href="#10">Submit Orders Using a Blotter</a></li><li><a href="#17">Canceling Orders</a></li><li><a href="#19">Cancel Queued Orders</a></li><li><a href="#22">Cleaning Up</a></li></ul></div><h2>Create a Connection<a name="1"></a></h2><p>First create a connection to Rotman Interactive Trader and list the functions (methods) available.</p><pre class="codeinput">rit = rotmanTrader;
+methods(rit)
+</pre><pre class="codeoutput">
+Methods for class rotmanTrader:
+
+addOrder           cancelQueuedOrder  isOrderQueued      subscribe          
+addUpdateFcn       clearQueuedOrders  limitOrder         unsubscribe        
+addprop            delete             removeUpdateFcn    update             
+blotterOrder       getOrderInfo       restartTimer       
+buy                getOrders          rotmanTrader       
+cancelOrder        getSubscriptions   sell               
+cancelOrderExpr    getTickerInfo      stopUpdates        
+
+Call "methods('handle')" for methods of rotmanTrader inherited from handle.
+
+</pre><p>To get more information on the functions, type help or doc and the name of the function.  For example:</p><pre class="codeinput">help <span class="string">rotmanTrader</span>
+help <span class="string">rotmanTrader/buy</span>
+help <span class="string">sell</span> <span class="comment">% same as help rotmanTrader/sell</span>
+</pre><pre class="codeoutput"> ROTMANTRADER connects MATLAB(R) to Rotman Interactive Trader
+ 
+    RIT = ROTMANTRADER will create a connection to the Rotman
+    Interactive Trader API using the path specified in the Windows
+    System registry.
+ 
+    RIT = ROTMANTRADER(DLLPATH) connects to Rotman Interactive Trader
+    through the DLLPATH specified.  This allows connection to different
+    dll locations.
+ 
+    A connection is required to trade from MATLAB through Rotman
+    Interactive Trader.
+ 
+    Example:
+    rit = rotmanTrader
+ 
+    See also: buy, sell, limitOrder, blotterOrder, addOrder
+
+    Published output in the Help browser
+       showdemo rotmanTrader
+
+ BUY submits a market buy order to Rotman Interactive Trader.
+ 
+    ID = buy(RIT,TICKER,SIZE) returns queued order ID if market
+    order was successfully submitted.  RIT is the
+    connection to Rotman interactive Trader.  TICKER is the
+    symbol(s) as a string or cell array of strings for the
+    tickers to trade.  SIZE is the quantity to buy at market.
+ 
+    Example:
+    rit = rotmanTrader;
+    buyID = buy(rit,'CRZY',100)
+    sellID = buy(rit,'TAME',-100) % negative is sell
+ 
+    See also sell, limitOrder, addOrder, blotterOrder
+
+    Published output in the Help browser
+       showdemo rotmanTrader
+
+ --- help for rotmanTrader/sell ---
+
+ SELL submits a market sell order to Rotman Interactive Trader.
+ 
+    ID = SELL(RIT,TICKER,SIZE) returns queued order id if
+    market order was successfully submitted.  RIT is the
+    connection to Rotman interactive Trader.  TICKER is the
+    symbol(s) as a string or cell array of strings for the
+    tickers to trade.  SIZE is the quantity to buy at market.
+ 
+    Example:
+    rit = rotmanTrader;
+    sellID = sell(rit,'TAME',200)
+    buyID = sell(rit,'CRZY',-200)
+ 
+    See also buy, limitOrder, addOrder, blotterOrder
+
+    Published output in the Help browser
+       showdemo rotmanTrader
+
+</pre><h2>Submitting Market Orders<a name="3"></a></h2><p>Buy and sell market order for a single security.  For both <tt>buy</tt> and <tt>sell</tt> functions, the returned value is the orderID.</p><pre class="codeinput">buyID = buy(rit,<span class="string">'CRZY'</span>,10)
+sellID = sell(rit,<span class="string">'TAME'</span>,15)
+</pre><pre class="codeoutput">
+buyID =
+
+    85
+
+
+sellID =
+
+    86
+
+</pre><p>Buy and sell market order for multiple securities at same quantity</p><pre class="codeinput">tickers = {<span class="string">'CRZY'</span>,<span class="string">'TAME'</span>};
+qty = 20;
+buyID = buy(rit,tickers,qty)
+sellID = sell(rit,tickers,qty)
+</pre><pre class="codeoutput">
+buyID =
+
+    87    88
+
+
+sellID =
+
+    89    90
+
+</pre><p>Buy and sell market orders for multiple securities at diferent quantities</p><pre class="codeinput">buyID = buy(rit,tickers,[30 40])
+buyID = sell(rit,tickers, [50 60])
+</pre><pre class="codeoutput">
+buyID =
+
+    91    92
+
+
+buyID =
+
+    93    94
+
+</pre><p>Type of order can also be changed based upon the qty sign.  If submitting a buy order with quantity of -70 it becomes a sell order.</p><pre class="codeinput">buyID = buy(rit,<span class="string">'CRZY'</span>,-70)  <span class="comment">% becomes sell order</span>
+sellID = sell(rit,<span class="string">'TAME'</span>,-80) <span class="comment">% becomes buy order</span>
+</pre><pre class="codeoutput">
+buyID =
+
+    95
+
+
+sellID =
+
+    96
+
+</pre><h2>Submitting Limit Orders<a name="7"></a></h2><p>Limit orders can be submitted using the limitOrder function.</p><pre class="codeinput">help <span class="string">limitOrder</span>
+</pre><pre class="codeoutput"> --- help for rotmanTrader/limitOrder ---
+
+ LIMITORDER submits a limit order to Rotman Interactive Trader.
+ 
+    ID = LIMITORDER(RIT,TICKER,QTY,PRICE) submits a market buy
+    or sell order depending upon the sign of QTY and returns
+    queued ID when order is accepted.  False (0) if not
+    accepted, and -1 if the case is not running.    RIT is the
+    connection to Rotman interactive Trader.  TICKER is the
+    symbol(s) as a string or cell array of strings for the
+    securities to trade.  QTY is the quantity to submit for bid
+    (buy) or ask (sell).  Price is the bid/ask price to offer.
+ 
+    QTY defines the limit order as a buy limit order if
+    positive.  If QTY is negative, submits a sell limit order.
+ 
+    Example:
+    rit = rotmanTrader;
+    limitBuyID = limitOrder(rit,'CRZY',90,20.00)
+    limitSellID = limitOrder(rit,'TAME',-100,15.00)
+    
+    See also buy, sell, addOrder, blotterOrder
+
+    Published output in the Help browser
+       showdemo rotmanTrader
+
+</pre><p>Submit a buy limit order, a bit for CRZY at price of 20.00 and quantity 90</p><pre class="codeinput">buyID = limitOrder(rit,<span class="string">'CRZY'</span>,90,20.00)
+</pre><pre class="codeoutput">
+buyID =
+
+    97
+
+</pre><p>Submit a sell limit order, an ask for TAME at price of 15.00 and quantity 100. Note the quantity is (-) negative, to denote a sell limit order.</p><pre class="codeinput">limitID = limitOrder(rit,<span class="string">'TAME'</span>,-100,15.00)
+</pre><pre class="codeoutput">
+limitID =
+
+    98
+
+</pre><h2>Submit Orders Using a Blotter<a name="10"></a></h2><p>Create an order blotter, a table with order information</p><pre class="codeinput">help <span class="string">blotterOrder</span>
+</pre><pre class="codeoutput"> --- help for rotmanTrader/blotterOrder ---
+
+ BLOTTERORDER submits orders using an order blotter to Rotman
+ Interactive Trader.
+ 
+    ID = BLOTTERORDER(RIT,BLOTTER) submits orders to Rotman
+    Interactive Trader, through connection RIT.  BLOTTER is the
+    order table specifying orders to place.
+ 
+    For market orders, BLOTTER must contain the variables names
+    TICKER, QUANTITY, and ACTION (with Buy/Sell values).
+ 
+    For limit orders, BLOTTER must contain the variable names
+    TICKER, QUANTITY, ACTION (with Buy/Sell values) and PRICE
+    of the limit order.  To submit a market order with limit
+    orders, PRICE must be set to 0 or NaN for the market
+    orders.  Otherwise the will be submitted as market orders.
+ 
+    Example:
+    rit = rotmanTrader;
+    % Create a blotter of buy and sells at market (no need for Price).
+    ticker  = {'CRZY'; 'TAME'}; % tables need column vectors (use ; instead of ,)
+    action   = {'Buy'; 'Sell'};
+    quantity = [110; 120];
+    blotter = table(ticker,action,quantity)
+    % submit the blotter order
+    blotterID = blotterOrder(rit,blotter)
+    % Add some limit orders into the mix.  Prices must be present to define a
+    % limit order.  Use 0 or nans for market orders in prices.
+    ticker  = {'CRZY'; 'TAME'; 'CRZY'; 'CRZY'; 'TAME'; 'TAME'};
+    action   = {'Buy'; 'Sell'; 'Buy'; 'Sell'; 'Buy';'Sell'};
+    quantity = [130; 140; 150; 160; 170; 180];
+    price   = [nan; nan; 9.50; 10.5; 24.5; 26.5];
+    blotter = table(ticker,action,quantity, price)
+    % submit the blotter order
+    blotterID = blotterOrder(rit,blotter)
+ 
+    See also: buy, sell, limitOrder, addOrder
+
+    Published output in the Help browser
+       showdemo rotmanTrader
+
+</pre><p>Create a blotter of buy and sells at market (no need for Price).</p><pre class="codeinput">ticker  = {<span class="string">'CRZY'</span>; <span class="string">'TAME'</span>}; <span class="comment">% tables need column vectors (use ; instead of ,)</span>
+action   = {<span class="string">'Buy'</span>; <span class="string">'Sell'</span>};
+quantity = [110; 120];
+blotter = table(ticker,action,quantity)
+</pre><pre class="codeoutput">
+blotter = 
+
+    ticker    action    quantity
+    ______    ______    ________
+
+    'CRZY'    'Buy'     110     
+    'TAME'    'Sell'    120     
+
+</pre><p>submit the blotter order</p><pre class="codeinput">blotterID = blotterOrder(rit,blotter)
+</pre><pre class="codeoutput">
+blotterID =
+
+    99
+   100
+
+</pre><p>Add some limit orders into the mix.  Prices must be present to define a limit order.  Use 0 or nans for market orders in prices.</p><pre class="codeinput">ticker  = {<span class="string">'CRZY'</span>; <span class="string">'TAME'</span>; <span class="string">'CRZY'</span>; <span class="string">'CRZY'</span>; <span class="string">'TAME'</span>; <span class="string">'TAME'</span>};
+action   = {<span class="string">'Buy'</span>; <span class="string">'Sell'</span>; <span class="string">'Buy'</span>; <span class="string">'Sell'</span>; <span class="string">'Buy'</span>;<span class="string">'Sell'</span>};
+quantity = [130; 140; 150; 160; 170; 180];
+price   = [nan; nan; 9.50; 10.5; 24.5; 26.5];
+blotter = table(ticker,action,quantity, price)
+</pre><pre class="codeoutput">
+blotter = 
+
+    ticker    action    quantity    price
+    ______    ______    ________    _____
+
+    'CRZY'    'Buy'     130          NaN 
+    'TAME'    'Sell'    140          NaN 
+    'CRZY'    'Buy'     150          9.5 
+    'CRZY'    'Sell'    160         10.5 
+    'TAME'    'Buy'     170         24.5 
+    'TAME'    'Sell'    180         26.5 
+
+</pre><p>submit the blotter order</p><pre class="codeinput">tf = blotterOrder(rit,blotter)
+pause(10)
+</pre><pre class="codeoutput">
+tf =
+
+   101
+   102
+   103
+   104
+   105
+   106
+
+</pre><pre class="codeinput">id = getOrders(rit)
+</pre><pre class="codeoutput">
+id =
+
+        1172        1168        1167         813         808         799
+
+</pre><pre class="codeinput">orderBlotter = getOrderInfo(rit,id)
+</pre><pre class="codeoutput">
+orderBlotter = 
+
+    OrderID    Ticker     Type     OrderType    Quantity    Price    Status    Quantity2
+    _______    ______    ______    _________    ________    _____    ______    _________
+
+    1172       'TAME'    'SELL'    'LIMIT'      -180        26.5     'LIVE'    180      
+    1168       'CRZY'    'SELL'    'LIMIT'      -160        10.5     'LIVE'    160      
+    1167       'CRZY'    'BUY'     'LIMIT'       150         9.5     'LIVE'    150      
+     813       'TAME'    'SELL'    'LIMIT'      -180        26.5     'LIVE'    180      
+     808       'CRZY'    'BUY'     'LIMIT'       150         9.5     'LIVE'    150      
+     799       'TAME'    'SELL'    'LIMIT'      -300          26     'LIVE'    300      
+
+</pre><h2>Canceling Orders<a name="17"></a></h2><p>Cancel an order by order ID</p><pre class="codeinput">cancelID = id(1);
+cancelOrder(rit,cancelID)
+pause(3)
+orderBlotter = getOrderInfo(rit,id)
+</pre><pre class="codeoutput">
+orderBlotter = 
+
+    OrderID    Ticker     Type     OrderType    Quantity    Price    Status    Quantity2
+    _______    ______    ______    _________    ________    _____    ______    _________
+
+    1168       'CRZY'    'SELL'    'LIMIT'      -160        10.5     'LIVE'    160      
+    1167       'CRZY'    'BUY'     'LIMIT'       150         9.5     'LIVE'    150      
+     813       'TAME'    'SELL'    'LIMIT'      -180        26.5     'LIVE'    180      
+     808       'CRZY'    'BUY'     'LIMIT'       150         9.5     'LIVE'    150      
+     799       'TAME'    'SELL'    'LIMIT'      -300          26     'LIVE'    300      
+
+</pre><p>Cancel orders by expression</p><pre class="codeinput">expr = <span class="string">'Price &lt;= 15.00 AND ticker = ''CRZY'''</span>;
+cancelOrderExpr(rit,expr)
+pause(3)
+orderBlotter = getOrderInfo(rit,id)
+</pre><pre class="codeoutput">
+orderBlotter = 
+
+    OrderID    Ticker     Type     OrderType    Quantity    Price    Status    Quantity2
+    _______    ______    ______    _________    ________    _____    ______    _________
+
+    813        'TAME'    'SELL'    'LIMIT'      -180        26.5     'LIVE'    180      
+    799        'TAME'    'SELL'    'LIMIT'      -300          26     'LIVE'    300      
+
+</pre><h2>Cancel Queued Orders<a name="19"></a></h2><p>Orders are submitted to Rotaman Interactive Trader and may be queued if the orders are submitted faster than the case allows.  The queued orders can be queried and even deleted.  Resubmite the blotter order from above, query which ones are still queued, and then cancel them.</p><pre class="codeinput">blotter
+queuedID = blotterOrder(rit,blotter)
+inQueue = isOrderQueued(rit,queuedID)
+cancelQueuedOrder(rit,queuedID(inQueue))
+isOrderQueued(rit,queuedID)
+id = getOrders(rit)
+orderBlotter = getOrderInfo(rit,id)
+</pre><pre class="codeoutput">
+blotter = 
+
+    ticker    action    quantity    price
+    ______    ______    ________    _____
+
+    'CRZY'    'Buy'     130          NaN 
+    'TAME'    'Sell'    140          NaN 
+    'CRZY'    'Buy'     150          9.5 
+    'CRZY'    'Sell'    160         10.5 
+    'TAME'    'Buy'     170         24.5 
+    'TAME'    'Sell'    180         26.5 
+
+
+queuedID =
+
+   107
+   108
+   109
+   110
+   111
+   112
+
+
+inQueue =
+
+     0
+     1
+     1
+     1
+     1
+     1
+
+
+ans =
+
+     0
+     0
+     0
+     0
+     0
+     0
+
+
+id =
+
+   813   799
+
+
+orderBlotter = 
+
+    OrderID    Ticker     Type     OrderType    Quantity    Price    Status    Quantity2
+    _______    ______    ______    _________    ________    _____    ______    _________
+
+    813        'TAME'    'SELL'    'LIMIT'      -180        26.5     'LIVE'    180      
+    799        'TAME'    'SELL'    'LIMIT'      -300          26     'LIVE'    300      
+
+</pre><p>Alternatively, you can submit orders faster than RIT can accept them. This allows canceling queued orders that have not been accepted yet (9 of 10 orders will be canceled).</p><pre class="codeinput">queuedID = zeros(10,1);
+<span class="keyword">for</span> order = 1:10
+    queuedID(order) = buy(rit,<span class="string">'CRZY'</span>,10*order);
+<span class="keyword">end</span>
+cancelQueuedOrder(rit,queuedID)
+</pre><p>Can also clear all queued orders using clearQueuedOrders</p><pre class="codeinput">blotter
+queuedID = blotterOrder(rit,blotter)
+inQueue = isOrderQueued(rit,queuedID)
+clearQueuedOrders(rit)
+isOrderQueued(rit,queuedID)
+id = getOrders(rit)
+orderBlotter = getOrderInfo(rit,id)
+</pre><pre class="codeoutput">
+blotter = 
+
+    ticker    action    quantity    price
+    ______    ______    ________    _____
+
+    'CRZY'    'Buy'     130          NaN 
+    'TAME'    'Sell'    140          NaN 
+    'CRZY'    'Buy'     150          9.5 
+    'CRZY'    'Sell'    160         10.5 
+    'TAME'    'Buy'     170         24.5 
+    'TAME'    'Sell'    180         26.5 
+
+
+queuedID =
+
+   123
+   124
+   125
+   126
+   127
+   128
+
+
+inQueue =
+
+     0
+     1
+     1
+     1
+     1
+     1
+
+
+ans =
+
+     0
+     0
+     0
+     0
+     0
+     0
+
+
+id =
+
+   813   799
+
+
+orderBlotter = 
+
+    OrderID    Ticker     Type     OrderType    Quantity    Price    Status    Quantity2
+    _______    ______    ______    _________    ________    _____    ______    _________
+
+    813        'TAME'    'SELL'    'LIMIT'      -180        26.5     'LIVE'    180      
+    799        'TAME'    'SELL'    'LIMIT'      -300          26     'LIVE'    300      
+
+</pre><h2>Cleaning Up<a name="22"></a></h2><p>To properly clean up, you first need to delete the <tt>rotmanTrader</tt> connection before clearing it from the workspace.  This stops the updates and disconnect from Rotman Interactive Trader.</p><pre class="codeinput">delete(rit)
+clear <span class="string">rit</span>
+</pre><p>We now no longer have a connection.</p><p>If you cleared the rit variable before issuing delete, the update timer is still running in the background, and you may see errors/warnings.  To stop it, issue the following command:</p><pre class="codeinput">delete(timerfind(<span class="string">'Name'</span>,<span class="string">'RotmanTrader'</span>))
+</pre><p class="footer">Copyright 2015 The MathWorks, Inc.<br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Trading with Rotman Intractive Trader
+% This example shows how to use the rotmanTrader functions to connect to
+% and trade through Rotman Interactive Trader (RIT).  RIT must be installed
+% on your computer along with the Excel(R) RTD Links.  For more information
+% visit http://rit.rotman.utoronto.ca/software.asp.  This example also
+% assumes that RIT is running Liability Trading 3 Case.
+
+% Copyright 2015 The MathWorks, Inc.
+
+%% Create a Connection
+% First create a connection to Rotman Interactive Trader and list the
+% functions (methods) available.
+rit = rotmanTrader;
+methods(rit)
+
+%%
+% To get more information on the functions, type help or doc and the name
+% of the function.  For example:
+help rotmanTrader
+help rotmanTrader/buy
+help sell % same as help rotmanTrader/sell
+
+%% Submitting Market Orders
+% Buy and sell market order for a single security.  For both |buy| and
+% |sell| functions, the returned value is the orderID.
+buyID = buy(rit,'CRZY',10)
+sellID = sell(rit,'TAME',15)
+
+%%
+% Buy and sell market order for multiple securities at same quantity
+tickers = {'CRZY','TAME'};
+qty = 20;
+buyID = buy(rit,tickers,qty)
+sellID = sell(rit,tickers,qty)
+
+%%
+% Buy and sell market orders for multiple securities at diferent quantities
+buyID = buy(rit,tickers,[30 40])
+buyID = sell(rit,tickers, [50 60])
+
+%%
+% Type of order can also be changed based upon the qty sign.  If submitting
+% a buy order with quantity of -70 it becomes a sell order.
+buyID = buy(rit,'CRZY',-70)  % becomes sell order
+sellID = sell(rit,'TAME',-80) % becomes buy order
+
+%% Submitting Limit Orders
+% Limit orders can be submitted using the limitOrder function.
+help limitOrder
+
+%%
+% Submit a buy limit order, a bit for CRZY at price of 20.00 and quantity
+% 90
+buyID = limitOrder(rit,'CRZY',90,20.00)
+%%
+% Submit a sell limit order, an ask for TAME at price of 15.00 and quantity
+% 100. Note the quantity is (-) negative, to denote a sell limit order.
+limitID = limitOrder(rit,'TAME',-100,15.00)
+
+%% Submit Orders Using a Blotter
+% Create an order blotter, a table with order information
+help blotterOrder
+%%
+% Create a blotter of buy and sells at market (no need for Price).
+ticker  = {'CRZY'; 'TAME'}; % tables need column vectors (use ; instead of ,)
+action   = {'Buy'; 'Sell'};
+quantity = [110; 120];
+blotter = table(ticker,action,quantity)
+
+%%
+% submit the blotter order
+blotterID = blotterOrder(rit,blotter)
+
+%%
+% Add some limit orders into the mix.  Prices must be present to define a
+% limit order.  Use 0 or nans for market orders in prices.
+ticker  = {'CRZY'; 'TAME'; 'CRZY'; 'CRZY'; 'TAME'; 'TAME'};
+action   = {'Buy'; 'Sell'; 'Buy'; 'Sell'; 'Buy';'Sell'};
+quantity = [130; 140; 150; 160; 170; 180];
+price   = [nan; nan; 9.50; 10.5; 24.5; 26.5];
+blotter = table(ticker,action,quantity, price)
+
+%%
+% submit the blotter order
+tf = blotterOrder(rit,blotter)
+pause(10)
+%%
+id = getOrders(rit)
+
+%%
+orderBlotter = getOrderInfo(rit,id)
+
+%% Canceling Orders
+% Cancel an order by order ID
+cancelID = id(1);
+cancelOrder(rit,cancelID)
+pause(3)
+orderBlotter = getOrderInfo(rit,id)
+
+%%
+% Cancel orders by expression
+expr = 'Price <= 15.00 AND ticker = ''CRZY''';
+cancelOrderExpr(rit,expr)
+pause(3)
+orderBlotter = getOrderInfo(rit,id)
+
+%% Cancel Queued Orders
+% Orders are submitted to Rotaman Interactive Trader and may be queued if
+% the orders are submitted faster than the case allows.  The queued orders
+% can be queried and even deleted.  Resubmite the blotter order from above,
+% query which ones are still queued, and then cancel them.
+blotter
+queuedID = blotterOrder(rit,blotter)
+inQueue = isOrderQueued(rit,queuedID)
+cancelQueuedOrder(rit,queuedID(inQueue))
+isOrderQueued(rit,queuedID)
+id = getOrders(rit)
+orderBlotter = getOrderInfo(rit,id)
+
+%%
+% Alternatively, you can submit orders faster than RIT can accept them.
+% This allows canceling queued orders that have not been accepted yet (9 of
+% 10 orders will be canceled).
+queuedID = zeros(10,1);
+for order = 1:10
+    queuedID(order) = buy(rit,'CRZY',10*order);
+end
+cancelQueuedOrder(rit,queuedID)
+
+%%
+% Can also clear all queued orders using clearQueuedOrders
+blotter
+queuedID = blotterOrder(rit,blotter)
+inQueue = isOrderQueued(rit,queuedID)
+clearQueuedOrders(rit)
+isOrderQueued(rit,queuedID)
+id = getOrders(rit)
+orderBlotter = getOrderInfo(rit,id)
+
+%% Cleaning Up
+% To properly clean up, you first need to delete the |rotmanTrader|
+% connection before clearing it from the workspace.  This stops the updates
+% and disconnect from Rotman Interactive Trader.
+delete(rit)
+clear rit
+
+%%
+% We now no longer have a connection.
+%
+% If you cleared the rit variable before issuing delete, the update timer is
+% still running in the background, and you may see errors/warnings.  To
+% stop it, issue the following command:
+delete(timerfind('Name','RotmanTrader'))
+
+##### SOURCE END #####
+--></body></html>
